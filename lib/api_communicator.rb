@@ -32,9 +32,19 @@ end
 
 def parse_character_movies(films_hash)
   films_url_array = []
-  binding.pry
   films_hash.each do |film_urls|
     films_url_array << film_urls
+  end
+
+  episode_infobus_array = []
+
+  films_url_array.each do |film_url|
+    episode = RestClient.get(film_url)
+    episode_infobus_array << JSON.parse(episode)
+  end
+
+  episode_infobus_array.each do |episode_info|
+    puts episode_info["title"]
   end
 end
 
